@@ -1,12 +1,50 @@
 // TODO: Include packages needed for this application
+const { rejects } = require('assert');
+const fs = require('fs');
+const { resolve } = require('path');
 const inquirer = require("inquirer");
 const generateMarkdown = require("./Develop/utils/generateMarkdown");
-// TODO: Create an array of questions for user input
-const questions = [];
 
+// TODO: Create an array of questions for user input
+const questions = ['Enter title name of readme file? ( Required )', 
+'Enter description of your project\'s title (Required) :',
+'Write instruction to install your project ( Required ): ',
+'Write instruction to use your project ( Required ): ',
+'Which license you use to build this project? ',
+'Please write about contribution guidelines on your project : ',
+'Enter some tests : '
+];
+
+var licenseChoices = ["None",
+    "Apache License 2.0",
+    "GNU General Public License v3.0",
+    "MIT License",
+    "BSD 2-Clause \"Simplified\" License",
+    "BSD 3-Clause \"New\" or \"Revised\" License",
+    "Boost Software License 1.0",
+    "Creative Commons Zero v1.0 Universal",
+    "Eclipse Public License 2.0",
+    "GNU Affero General Public License v3.0",
+    "GNU General Public License v2.0",
+    "GNU Lesser General Public License v2.1",
+    "Mozilla Public License 2.0",
+    "The Unlicense"
+]
 // TODO: Create a function to write README file
 var writeToFile = (fileName, data) => {
-    console.log(fileName, data);
+    return new Promise((resolve, reject)=>{
+    fs.writeFile(fileName, data , err => {
+        if (err){
+          reject (err);
+        return;
+        }
+        resolve({
+            ok: true,
+            message: 'File created!'
+        })
+        console.log("Readme.md file created succesfully");
+    });
+});
 }
 
 // TODO: Create a function to initialize app
@@ -15,7 +53,7 @@ var init =() => {
         {
           type: 'input',
           name: 'title',
-          message: 'Enter title name of readme file? ( Required )',
+          message: questions[0],
           validate: nameInput => {
               if (nameInput) {
                 return true;
@@ -28,7 +66,7 @@ var init =() => {
         {
           type: 'input',
           name: 'description',
-          message: 'Enter description of your project\'s title (Required) :',
+          message: questions[1],
           validate: nameInput => {
               if (nameInput) {
                 return true;
@@ -41,7 +79,7 @@ var init =() => {
         {
           type: 'input',
           name: 'installation',
-          message: 'Write instruction to install your project ( Required ): ',
+          message: questions[2],
           validate: nameInput => {
             if (nameInput) {
               return true;
@@ -54,7 +92,7 @@ var init =() => {
         {
             type: 'input',
             name: 'usage',
-            message: 'Write instruction to use your project ( Required ): ',
+            message: questions[3],
             validate: nameInput => {
               if (nameInput) {
                 return true;
@@ -64,25 +102,33 @@ var init =() => {
               }
             }
           },
+          {
+            type: 'checkbox',
+            name: 'license',
+            message: questions[4],
+            choices: licenseChoices
+        },
         {
             type: 'input',
             name: 'contribution',
-            message: 'Please write about contribution guidelines on your project : '
+            message: questions[5]
         },
         {
             type: 'input',
             name: 'test',
-            message: 'Enter some tests : '
+            message: questions[6]
         },
       ]);
     };
 
-// Table of Contents, Installation, Usage, License, Contributing, Tests, and Questions
-
 // Function call to initialize app
 init()
-.then(data => {
-    writeToFile("README.md", data);
+.then(userInput => {
+    return generateMarkdown(userInput);
+})
+.then(data =>{
+    console.log(data);
+    writeToFile("./dist/README.md", data);
 })
 .catch(err => {
     console.log(err);
