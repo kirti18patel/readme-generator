@@ -103,7 +103,7 @@ var init =() => {
             }
           },
           {
-            type: 'checkbox',
+            type: 'list',
             name: 'license',
             message: questions[4],
             choices: licenseChoices
