@@ -5,7 +5,9 @@ const generateMarkdown = require("./Develop/utils/generateMarkdown");
 const questions = [];
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+var writeToFile = (fileName, data) => {
+    console.log(fileName, data);
+}
 
 // TODO: Create a function to initialize app
 var init =() => {
@@ -79,8 +81,8 @@ var init =() => {
 
 // Function call to initialize app
 init()
-.then(userInput => {
-    console.log(userInput);
+.then(data => {
+    writeToFile("README.md", data);
 })
 .catch(err => {
     console.log(err);
