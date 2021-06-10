@@ -44,7 +44,7 @@ var init =() => {
             if (nameInput) {
               return true;
             } else {
-              console.log('Please enter valid installation instructions!');
+              console.log('Please enter valid installation instructions !');
               return false;
             }
           }
