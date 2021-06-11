@@ -6,13 +6,15 @@ const inquirer = require("inquirer");
 const generateMarkdown = require("./Develop/utils/generateMarkdown");
 
 // TODO: Create an array of questions for user input
-const questions = ['Enter title name of readme file? ( Required )', 
-'Enter description of your project\'s title (Required) :',
-'Write instruction to install your project ( Required ): ',
-'Write instruction to use your project ( Required ): ',
-'Which license you use to build this project? ',
-'Please write about contribution guidelines on your project : ',
-'Enter some tests : '
+const questions = ['What is your Github Username? ', 
+'What is your Email address? ',
+'What is your project\'s name? ',
+'Please write a short description of your project? ',
+'What kind of license should your project have? ',
+'What comand should be run to install depenencies? ',
+'What command should be run to run tests? ',
+'What does the user need to know about using the repo? ',
+'What does the user need to know about contributing to repo? '
 ];
 
 var licenseChoices = ["None",
@@ -52,57 +54,49 @@ var init =() => {
     return inquirer.prompt([
         {
           type: 'input',
-          name: 'title',
+          name: 'github',
           message: questions[0],
           validate: nameInput => {
               if (nameInput) {
                 return true;
               } else {
-                console.log('Please enter valid title name!');
+                console.log('Please enter valid github username!');
                 return false;
               }
             }
         },
         {
           type: 'input',
-          name: 'description',
+          name: 'email',
           message: questions[1],
           validate: nameInput => {
               if (nameInput) {
                 return true;
               } else {
-                console.log('Please enter valid description!');
+                console.log('Please enter valid email!');
                 return false;
               }
             }
         },
         {
           type: 'input',
-          name: 'installation',
+          name: 'title',
           message: questions[2],
           validate: nameInput => {
             if (nameInput) {
               return true;
             } else {
-              console.log('Please enter valid installation instructions !');
+              console.log('Please enter valid projects\'s name!');
               return false;
             }
           }
         },
         {
             type: 'input',
-            name: 'usage',
+            name: 'description',
             message: questions[3],
-            validate: nameInput => {
-              if (nameInput) {
-                return true;
-              } else {
-                console.log('Please enter valid usage instructions!');
-                return false;
-              }
-            }
-          },
-          {
+        },
+        {
             type: 'list',
             name: 'license',
             message: questions[4],
@@ -110,12 +104,24 @@ var init =() => {
         },
         {
             type: 'input',
-            name: 'contribution',
-            message: questions[5]
+            name: 'installation',
+            message: questions[5],
+            default: "npm i"
         },
         {
             type: 'input',
             name: 'test',
+            message: questions[6],
+            default: "npm test"
+        },
+        {
+            type: 'input',
+            name: 'usage',
+            message: questions[6]
+        },
+        {
+            type: 'input',
+            name: 'contribution',
             message: questions[6]
         },
       ]);
