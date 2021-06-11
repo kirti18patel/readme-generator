@@ -16,7 +16,7 @@ function generateMarkdown(data) {
   return `# ${data.title}
 
   ## Description 
-  ${data.description}
+  > ${data.description}
 
   ## Table of Contents
   * [License](#license)
@@ -26,23 +26,41 @@ function generateMarkdown(data) {
   * [Contribution](#Contribution)
 
 ## License
+
 ${data.license}
   
 ## Installation
+Install the dependencies and devDependencies.
+
+\`\`\`sh
 ${data.installation}
+\`\`\`
+
 
 ## Test
+\`\`\`sh
 ${data.test}
+\`\`\`
 
 ## Usage 
 ${data.usage}
 
 ## Contribution
-${data.contribution}
+
+Want to contribute? Great!
+
+Make a change in your file and instantaneously see your updates!
+Open your favorite Terminal and run these commands.
+
+\`\`\`sh
+node index.js
+\`\`\`
+
+Also, ${data.contribution}.
 
 #### Contact - **${data.email}**
 
-© [${data.github}]()
+${data.license} © [https://github.com/${data.github}](https://github.com/${data.github})
 `;
 }
 
