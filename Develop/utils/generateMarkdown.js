@@ -24,11 +24,12 @@ function generateMarkdown(data) {
   * [Test](#Test)  
   * [Usage](#usage)
   * [Contribution](#Contribution)
+  * [Contact](#contact)
 
 ## License
 
 ${data.license}
-  
+
 ## Installation
 Install the dependencies and devDependencies.
 
