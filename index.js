@@ -6,9 +6,9 @@ const inquirer = require("inquirer");
 const generateMarkdown = require("./Develop/utils/generateMarkdown");
 
 // TODO: Create an array of questions for user input
-const questions = ['What is your Github Username? (Required) ', 
-'What is your Email address? (Required) ',
-'What is your project\'s name? (Required) ',
+const questions = ['What is your Github Username? ', 
+'What is your Email address? ',
+'What is your project\'s name? ',
 'Please write a short description of your project? ',
 'What kind of license should your project have? ',
 'What comand should be run to install depenencies? ',
@@ -17,17 +17,17 @@ const questions = ['What is your Github Username? (Required) ',
 'What does the user need to know about contributing to repo? '
 ];
 
-const licenseChoices = ["None",
+var licenseChoices = ["None",
     "Apache",
     "GNU",
     "MIT",
     "BSD",
     "Eclipse",
     "Mozilla",
-    "The Unlicense"
+    "TheUnlicense"
 ]
 // TODO: Create a function to write README file
-const writeToFile = (fileName, data) => {
+var writeToFile = (fileName, data) => {
     return new Promise((resolve, reject)=>{
     fs.writeFile(fileName, data , err => {
         if (err){
@@ -124,10 +124,10 @@ var init =() => {
 // Function call to initialize app
 init()
 .then(userInput => {
-    console.log(userInput);
     return generateMarkdown(userInput);
 })
 .then(data =>{
+    console.log(data);
     writeToFile("./dist/README.md", data);
 })
 .catch(err => {

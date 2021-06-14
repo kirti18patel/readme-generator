@@ -1,7 +1,18 @@
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
-function renderLicenseBadge(license) {}
-
+var licenseBadge = {None : "", 
+    Apache : '[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)',
+    GNU : '[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)',
+    MIT : '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)',
+    BSD : '[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)',
+    Eclipse : '[![License](https://img.shields.io/badge/License-EPL%201.0-red.svg)](https://opensource.org/licenses/EPL-1.0)',
+    Mozilla : '[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)',
+    TheUnlicense : '[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)',
+}
+function renderLicenseBadge(license) {
+  // return licenseBadge.license;
+  return licenseBadge[license];
+}
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
 function renderLicenseLink(license) {}
@@ -88,6 +99,8 @@ const generateMarkdown=(userInput) =>{
   console.log("markdown generated");
   return `# ${userInput.title}
 
+  ${renderLicenseBadge(userInput.license)}
+
   ${description(userInput.description)}
 
   ## Table of Contents
@@ -95,8 +108,7 @@ const generateMarkdown=(userInput) =>{
   * [Installation](#installation)
   * [Test](#Test)  
   * [Usage](#usage)
-  * [Contribution](#Contribution)
-  * [Contact](#contact)
+  * [Contribution](#contribution)
 
 ## License
 
