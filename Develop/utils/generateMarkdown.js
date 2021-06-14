@@ -1,5 +1,4 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
+// license badge and links are declared in the form of an object
 var licenseInfo = {
   None : {
     badge : "" ,
@@ -35,6 +34,8 @@ var licenseInfo = {
   }
 }
 
+// TODO: Create a function that returns a license badge based on which license is passed in
+// If there is no license, return an empty string
 const renderLicenseBadge = license => {
   // return licenseBadge.license;
   return licenseInfo[license].badge;
@@ -52,7 +53,6 @@ const license = license => {
   if (!license) {
     return '';
   }
-
   return `## License 
 
   > ${license}
@@ -64,7 +64,6 @@ const description = description => {
   if (!description) {
     return '';
   }
-
   return `## Description 
 
   > ${description}
@@ -76,7 +75,6 @@ const installation = installation => {
   if (!installation) {
     return '';
   }
-
   return `## Installation
   Install the dependencies and devDependencies.
   
@@ -91,7 +89,6 @@ const test = test => {
   if (!test) {
     return '';
   }
-
   return `## Test
   \`\`\`sh
   ${test}
@@ -104,7 +101,6 @@ const usage = usage => {
   if (!usage) {
     return '';
   }
-
   return `## Usage 
   ${usage}
   `;
@@ -115,7 +111,6 @@ const contribution = contribution => {
   if (!contribution) {
     return '';
   }
-
   return `  
   ## Contribution
   
@@ -134,11 +129,10 @@ const contribution = contribution => {
 
 // TODO: Create a function to generate markdown for README
 const generateMarkdown=(userInput) =>{
-  console.log("markdown generated");
   return `# ${userInput.title}
 
   ${renderLicenseBadge(userInput.license)}
-  
+
   ${renderLicenseLink(userInput.license)}
 
   ${description(userInput.description)}

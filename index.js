@@ -17,6 +17,7 @@ const questions = ['What is your Github Username? ',
 'What does the user need to know about contributing to repo? '
 ];
 
+// all license options declared
 var licenseChoices = ["None",
     "Apache",
     "GNU",
@@ -26,6 +27,7 @@ var licenseChoices = ["None",
     "Mozilla",
     "TheUnlicense"
 ]
+
 // TODO: Create a function to write README file
 var writeToFile = (fileName, data) => {
     return new Promise((resolve, reject)=>{
@@ -119,7 +121,7 @@ var init =() => {
             message: questions[8]
         },
       ]);
-    };
+};
 
 // Function call to initialize app
 init()
@@ -127,7 +129,6 @@ init()
     return generateMarkdown(userInput);
 })
 .then(data =>{
-    console.log(data);
     writeToFile("./dist/README.md", data);
 })
 .catch(err => {
