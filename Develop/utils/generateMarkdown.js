@@ -1,37 +1,63 @@
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
-var licenseBadge = {None : "", 
-    Apache : '[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)',
-    GNU : '[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)',
-    MIT : '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)',
-    BSD : '[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)',
-    Eclipse : '[![License](https://img.shields.io/badge/License-EPL%201.0-red.svg)](https://opensource.org/licenses/EPL-1.0)',
-    Mozilla : '[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)',
-    TheUnlicense : '[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)'
+var licenseInfo = {
+  None : {
+    badge : "" ,
+    link : ""
+  }, 
+  Apache : {
+    badge : '[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)',
+    link : 'https://opensource.org/licenses/Apache-2.0'
+  },
+  GNU : {
+    badge : '[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)',
+    link : 'https://www.gnu.org/licenses/gpl-3.0'
+  },
+  MIT : {
+    badge : '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)',
+    link : 'https://opensource.org/licenses/MIT'
+  },
+  BSD : {
+    badge : '[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)',
+    link : 'https://opensource.org/licenses/BSD-3-Clause'
+  },
+  Eclipse : {
+    badge : '[![License](https://img.shields.io/badge/License-EPL%201.0-red.svg)](https://opensource.org/licenses/EPL-1.0)',
+    link : 'https://opensource.org/licenses/EPL-1.0'
+  },
+  Mozilla : {
+    badge : '[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)',
+    link : 'https://opensource.org/licenses/MPL-2.0'
+  },
+  TheUnlicense : {
+    badge : '[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)',
+    link : 'http://unlicense.org/'
+  }
 }
-var licenseLink = {None : "", 
-    Apache : 'https://opensource.org/licenses/Apache-2.0',
-    GNU : 'https://www.gnu.org/licenses/gpl-3.0',
-    MIT : 'https://opensource.org/licenses/MIT',
-    BSD : 'https://opensource.org/licenses/BSD-3-Clause',
-    Eclipse : 'https://opensource.org/licenses/EPL-1.0',
-    Mozilla : 'https://opensource.org/licenses/MPL-2.0',
-    TheUnlicense : 'http://unlicense.org/'
-}
-function renderLicenseBadge(license) {
+
+const renderLicenseBadge = license => {
   // return licenseBadge.license;
-  return licenseBadge[license];
+  return licenseInfo[license].badge;
 }
 
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
-function renderLicenseLink(license) {
-  return `${license} Link is : [${licenseLink[license]}](${licenseLink[license]})`;
+const renderLicenseLink = license => {
+  return `${license} Link is : [${licenseInfo[license].link}](${licenseInfo[license].link})`;
 }
 
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
-function renderLicenseSection(license) {}
+const license = license => {
+  if (!license) {
+    return '';
+  }
+
+  return `## License 
+
+  > ${license}
+  `;
+};
 
 // function to display content for description section 
 const description = description => {
@@ -112,6 +138,7 @@ const generateMarkdown=(userInput) =>{
   return `# ${userInput.title}
 
   ${renderLicenseBadge(userInput.license)}
+  
   ${renderLicenseLink(userInput.license)}
 
   ${description(userInput.description)}
@@ -123,9 +150,7 @@ const generateMarkdown=(userInput) =>{
   * [Usage](#usage)
   * [Contribution](#contribution)
 
-## License
-
-${userInput.license}
+${license(userInput.license)}
 ${installation(userInput.installation)}
 ${test(userInput.test)}
 ${usage(userInput.usage)}
