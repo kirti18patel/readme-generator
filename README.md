@@ -33,7 +33,7 @@ click the link below to check the repository : [Github Repository Link](https://
   ```
 
 ## Preview
-![alt app-demo-gif](walkthrough.gif)
+![alt app-demo-gif](walkthroughvideo.gif)
 
 ## Usage 
   User have to install all the dependencies before running it on terminal.
